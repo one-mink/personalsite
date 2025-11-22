@@ -93,6 +93,7 @@ main {
 }
 
 .main-footer {
+  bottom: 0;
   background-color: #1f1f2d;
   padding: 20px 0;
   text-align: center;
