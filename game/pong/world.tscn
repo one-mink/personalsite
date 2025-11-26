@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://bakhyn15luwuf"]
+
+[ext_resource type="PackedScene" uid="uid://b0nv0qmpemoof" path="res://player.tscn" id="1_f3sb7"]
+[ext_resource type="PackedScene" uid="uid://bwob1fxhw7ikm" path="res://wall.tscn" id="2_fj7yv"]
+[ext_resource type="Texture2D" uid="uid://c0m7ut3m2mfbp" path="res://images/arrow_left.png" id="3_aqk2v"]
+[ext_resource type="Texture2D" uid="uid://bw7wq21bvysut" path="res://images/arrow_right.png" id="4_036b0"]
+
+[node name="world" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Left" type="TouchScreenButton" parent="CanvasLayer/Control"]
+position = Vector2(68, 492)
+scale = Vector2(0.07, 0.07)
+texture_normal = ExtResource("3_aqk2v")
+action = "ui_left"
+
+[node name="Right" type="TouchScreenButton" parent="CanvasLayer/Control"]
+position = Vector2(921, 493)
+scale = Vector2(0.07, 0.07)
+texture_normal = ExtResource("4_036b0")
+action = "ui_right"
+
+[node name="up" type="TouchScreenButton" parent="CanvasLayer/Control"]
+position = Vector2(940, 505)
+rotation = 1.5707964
+scale = Vector2(0.03972241, 0.061625343)
+texture_normal = ExtResource("3_aqk2v")
+action = "ui_accept"
+
+[node name="Node2D" parent="." instance=ExtResource("1_f3sb7")]
+position = Vector2(344, 429)
+
+[node name="wall" parent="." instance=ExtResource("2_fj7yv")]
+position = Vector2(335, 500)
+
+[node name="wall2" parent="." instance=ExtResource("2_fj7yv")]
+position = Vector2(551, 444)
+
+[node name="wall3" parent="." instance=ExtResource("2_fj7yv")]
+position = Vector2(805, 321)
+
+[node name="wall4" parent="." instance=ExtResource("2_fj7yv")]
+position = Vector2(1080, 282)
+
+[node name="wall5" parent="." instance=ExtResource("2_fj7yv")]
+position = Vector2(1256, 120)
+
+[node name="wall6" parent="." instance=ExtResource("2_fj7yv")]
+position = Vector2(1461, 514)
+
+[node name="wall7" parent="." instance=ExtResource("2_fj7yv")]
+position = Vector2(1652, 196)
+
+[node name="wall8" parent="." instance=ExtResource("2_fj7yv")]
+position = Vector2(1842, 356)
+
+[node name="wall9" parent="." instance=ExtResource("2_fj7yv")]
+position = Vector2(2091, 151)
+
+[node name="wall10" parent="." instance=ExtResource("2_fj7yv")]
+position = Vector2(2313, 572)
