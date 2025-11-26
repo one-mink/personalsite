@@ -4,7 +4,7 @@
 // Incrementing CACHE_VERSION will kick off the install event and force
 // previously cached resources to be updated from the network.
 /** @type {string} */
-const CACHE_VERSION = '1764174782|71809111';
+const CACHE_VERSION = '1764189016|2893164537';
 /** @type {string} */
 const CACHE_PREFIX = 'pongbong-sw-cache-';
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;

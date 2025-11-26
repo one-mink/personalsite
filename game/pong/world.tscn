@@ -1,9 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://bakhyn15luwuf"]
+[gd_scene load_steps=8 format=3 uid="uid://bakhyn15luwuf"]
 
 [ext_resource type="PackedScene" uid="uid://b0nv0qmpemoof" path="res://player.tscn" id="1_f3sb7"]
 [ext_resource type="PackedScene" uid="uid://bwob1fxhw7ikm" path="res://wall.tscn" id="2_fj7yv"]
-[ext_resource type="Texture2D" uid="uid://c0m7ut3m2mfbp" path="res://images/arrow_left.png" id="3_aqk2v"]
-[ext_resource type="Texture2D" uid="uid://bw7wq21bvysut" path="res://images/arrow_right.png" id="4_036b0"]
+[ext_resource type="Script" uid="uid://bofnnyo4r8l3d" path="res://wall_lr.gd" id="3_aqk2v"]
+[ext_resource type="Script" uid="uid://duadbqsspxek1" path="res://wall_ud.gd" id="4_036b0"]
+[ext_resource type="Script" uid="uid://ct3fdvmy5wr6g" path="res://wall_lr2.gd" id="4_aqk2v"]
+[ext_resource type="Texture2D" uid="uid://b1rxlpjcracsl" path="res://images/line.png" id="6_dwbse"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_036b0"]
+font_size = 20
+font_color = Color(0, 0, 0, 1)
+outline_color = Color(0.06469653, 0.06469653, 0.06469653, 1)
 
 [node name="world" type="Node2D"]
 
@@ -16,22 +23,19 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Left" type="TouchScreenButton" parent="CanvasLayer/Control"]
-position = Vector2(68, 492)
+position = Vector2(242, 530)
 scale = Vector2(0.07, 0.07)
-texture_normal = ExtResource("3_aqk2v")
 action = "ui_left"
 
 [node name="Right" type="TouchScreenButton" parent="CanvasLayer/Control"]
-position = Vector2(921, 493)
-scale = Vector2(0.07, 0.07)
-texture_normal = ExtResource("4_036b0")
+position = Vector2(1008, 545)
+scale = Vector2(20, 20)
 action = "ui_right"
 
 [node name="up" type="TouchScreenButton" parent="CanvasLayer/Control"]
 position = Vector2(940, 505)
 rotation = 1.5707964
 scale = Vector2(0.03972241, 0.061625343)
-texture_normal = ExtResource("3_aqk2v")
 action = "ui_accept"
 
 [node name="Node2D" parent="." instance=ExtResource("1_f3sb7")]
@@ -41,28 +45,46 @@ position = Vector2(344, 429)
 position = Vector2(335, 500)
 
 [node name="wall2" parent="." instance=ExtResource("2_fj7yv")]
-position = Vector2(551, 444)
+position = Vector2(792, 333)
 
 [node name="wall3" parent="." instance=ExtResource("2_fj7yv")]
-position = Vector2(805, 321)
+position = Vector2(1206, 200)
 
 [node name="wall4" parent="." instance=ExtResource("2_fj7yv")]
-position = Vector2(1080, 282)
+position = Vector2(1546, 179)
+script = ExtResource("3_aqk2v")
 
 [node name="wall5" parent="." instance=ExtResource("2_fj7yv")]
-position = Vector2(1256, 120)
+position = Vector2(2008, 212)
 
 [node name="wall6" parent="." instance=ExtResource("2_fj7yv")]
-position = Vector2(1461, 514)
+position = Vector2(2638, 413)
 
 [node name="wall7" parent="." instance=ExtResource("2_fj7yv")]
-position = Vector2(1652, 196)
+position = Vector2(3271, 593)
+script = ExtResource("4_036b0")
 
 [node name="wall8" parent="." instance=ExtResource("2_fj7yv")]
-position = Vector2(1842, 356)
+position = Vector2(3664, 515)
 
 [node name="wall9" parent="." instance=ExtResource("2_fj7yv")]
-position = Vector2(2091, 151)
+position = Vector2(4117, 496)
+script = ExtResource("4_aqk2v")
 
 [node name="wall10" parent="." instance=ExtResource("2_fj7yv")]
-position = Vector2(2313, 572)
+position = Vector2(4512, 628)
+
+[node name="Line" type="Sprite2D" parent="."]
+position = Vector2(4649.75, 357.00003)
+scale = Vector2(0.23475401, 0.22068964)
+texture = ExtResource("6_dwbse")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 4477.0
+offset_top = 324.0
+offset_right = 4910.0
+offset_bottom = 435.0
+text = "You WIN!
+Thank you for visiting my Website!!!
+"
+label_settings = SubResource("LabelSettings_036b0")
