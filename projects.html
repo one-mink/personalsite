@@ -36,11 +36,16 @@
         <div class="header-container">
           <div class="content">
             <h2>Projects</h2>
-          </div>
-          <div class="text-container">
-            <div class="text-box">
-            <p>Sorry! No big projects yet!</p>
+          </div>    
+        <div class="text-container">
+          <div class="content">
+            <div class=text-container>
+              <div id= repos-container>
+                <p>loading...</p>
+              </div
             </div>
+          </div>
+
         </div>
       </main>
     </div>
@@ -55,5 +60,58 @@
         </nav>
       </div>
     </footer>
+    <script>
+    const GITHUB_USERNAME = "one-mink";
+    const API_URL = `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=10`;
+    const container = document.getElementById('repos-container');
+
+    fetch(API_URL)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`GitHub API error: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(repos => {
+            container.innerHTML = '';
+
+            if (repos.length === 0) {
+                container.innerHTML = '<p>none</p>';
+                return;
+            }
+
+
+            const ul = document.createElement('ul');
+            ul.style.listStyleType = 'none';
+            ul.style.paddingLeft = '0';
+            repos.forEach(repo => {
+                const listItem = document.createElement('li');
+
+                const link = document.createElement('a');
+                link.href = repo.html_url;
+                link.target = "_blank";
+                link.textContent = repo.name;
+                link.style.fontWeight = 'bold';
+                link.style.fontSize = '1.1em';
+                link.style.color = '#f0f0f0';
+
+                const description = document.createElement('p');
+                description.textContent = repo.description || 'no description.';
+                description.style.color = '#333';
+                description.style.marginTop = '5px';
+                description.style.marginBottom = '20px';
+
+                listItem.appendChild(link);
+                listItem.appendChild(description);
+                ul.appendChild(listItem);
+            });
+
+            container.appendChild(ul);
+        })
+        .catch(error => {
+            console.error('error:', error);
+            container.innerHTML = `<p style="color: red;">error: ${error.message}</p>`;
+        });
+</script>
   </body>
 </html>
