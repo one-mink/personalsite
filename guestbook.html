@@ -38,21 +38,23 @@
           </div>
         </div>
         <div class="text-container">
-          <div class="text-box">
-            <p>Sorry friends, the guestbook isn't working yet...</p>
+            <div class="text-box">
+              <form id="guestbook" method="POST">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required maxlength="50">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+                <button type="submit">Send</button>
+              </form>
+            </div>
           </div>
-        </div>
-        <div class="text-container">
-          <div class="text-box">
-            <form method="POST">
-              <label for="name">Name:</label>
-              <input type="text" id="name" name="name" required maxlength="50">
-              <label for="message">Message:</label>
-              <textarea id="message" name="message" rows="4" required></textarea>
-              <button type="submit">Send</button>
-            </form>
+          <div class="text-container">
+              <div class="text-box">
+                <div id="entries-list">
+                    <p>Loading guestbook entries...</p>
+                </div>
+              </div>
           </div>
-        </div>
       </main>
       <footer class="main-footer">
         <div class="footer-content">
@@ -66,4 +68,95 @@
         </div>
       </footer>
       </body>
-      </html>
+      <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+      <script>
+const SUPABASE_URL = 'https://weyxycjjnymawlpykeyo.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndleXh5Y2pqbnltYXdscHlrZXlvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU3MjA5NjcsImV4cCI6MjA4MTI5Njk2N30.IFG15RQi4BYP7zJY7RMox5McXvszbhpTjSWAxHJkrJw';
+
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+const entriesList = document.getElementById('entries-list');
+const guestbookForm = document.getElementById('guestbook');
+
+if (!guestbookForm || !entriesList) {
+    if (entriesList) entriesList.innerHTML = '<p style="color: red;">Setup Error: Missing HTML IDs (guestbook or entries-list).</p>';
+}
+
+const nameInput = document.getElementById('name');
+const messageInput = document.getElementById('message');
+
+const submitButton = guestbookForm ? guestbookForm.querySelector('button') : null;
+
+async function loadGuestbookEntries() {
+    if (!entriesList) return;
+
+    entriesList.innerHTML = 'Loading...';
+
+    const { data, error } = await supabase
+        .from('guestbook')
+        .select('name, message, created_at')
+        .order('created_at', { ascending: false });
+
+    if (error) {
+        entriesList.innerHTML = `<p style="color: red;">Error loading (Check RLS!): ${error.message}</p>`;
+        return;
+    }
+
+    if (data.length === 0) {
+        entriesList.innerHTML = '<p>No entries yet.</p>';
+        return;
+    }
+
+    entriesList.innerHTML = data.map(entry => {
+        const date = new Date(entry.created_at).toLocaleString('de-DE');
+
+        return `
+            <div class="text-box entry">
+                <p><strong>${entry.name}</strong>: </p>
+                <p>${entry.message}</p>
+                <small>Send: ${date}</small>
+            </div>
+        `;
+    }).join('');
+}
+
+async function submitEntry(event) {
+    event.preventDefault();
+
+    if (!nameInput || !messageInput || !submitButton) return;
+
+    const name = nameInput.value.trim();
+    const message = messageInput.value.trim();
+
+    if (!name || !message) {
+        alert('please enter everything.');
+        return;
+    }
+
+    submitButton.disabled = true;
+    submitButton.textContent = 'saving...';
+
+    const { error } = await supabase
+        .from('guestbook')
+        .insert([{ name, message }]);
+
+    if (error) {
+        alert('error saving (Check RLS!): ' + error.message);
+        console.error(error);
+    } else {
+        nameInput.value = '';
+        messageInput.value = '';
+        await loadGuestbookEntries();
+    }
+
+    submitButton.disabled = false;
+    submitButton.textContent = 'Send';
+}
+
+if (guestbookForm) {
+    guestbookForm.addEventListener('submit', submitEntry);
+}
+
+loadGuestbookEntries();
+</script>
+</html>
