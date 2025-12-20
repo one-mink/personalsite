@@ -38,14 +38,12 @@
             <h2>Projects</h2>
           </div>
         <div class="text-container">
-          <div class="content">
-            <div class=text-container>
+            <div class="text-container">
               <div id= repos-container>
                 <p>loading...</p>
-              </div
+              </div>
             </div>
           </div>
-
         </div>
       </main>
     </div>
@@ -76,41 +74,37 @@
             container.innerHTML = '';
 
             if (repos.length === 0) {
-                container.innerHTML = '<p>none</p>';
+                container.innerHTML = '<p>No projects found.</p>';
                 return;
             }
 
-
-            const ul = document.createElement('ul');
-            ul.style.listStyleType = 'none';
-            ul.style.paddingLeft = '0';
             repos.forEach(repo => {
-                const listItem = document.createElement('li');
+                const projectCard = document.createElement('div');
+                projectCard.className = 'pro-container';
+                projectCard.style.marginBottom = '20px';
 
-                const link = document.createElement('a');
-                link.href = repo.html_url;
-                link.target = "_blank";
-                link.textContent = repo.name;
-                link.style.fontWeight = 'bold';
-                link.style.fontSize = '1.1em';
-                link.style.color = '#f0f0f0';
+                const title = document.createElement('a');
+                title.href = repo.html_url;
+                title.target = "_blank";
+                title.textContent = repo.name;
+                title.style.fontWeight = 'bold';
+                title.style.fontSize = '1.2em';
+                title.style.color = '#f0f0f0';
+                title.style.textDecoration = 'none';
 
                 const description = document.createElement('p');
-                description.textContent = repo.description || 'no description.';
+                description.textContent = repo.description || 'No description available.';
                 description.style.color = '#dbdbd9';
-                description.style.marginTop = '5px';
-                description.style.marginBottom = '20px';
+                description.style.marginTop = '10px';
 
-                listItem.appendChild(link);
-                listItem.appendChild(description);
-                ul.appendChild(listItem);
+                projectCard.appendChild(title);
+                projectCard.appendChild(description);
+                container.appendChild(projectCard);
             });
-
-            container.appendChild(ul);
         })
         .catch(error => {
-            console.error('error:', error);
-            container.innerHTML = `<p style="color: red;">error: ${error.message}</p>`;
+            console.error('Error:', error);
+            container.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
         });
 </script>
   </body>

@@ -92,6 +92,19 @@ main {
   flex-grow: 1;
 }
 
+.pro-container {
+  gap: 20px;
+  padding: 10px;
+  background-color: #5d5e76;
+  border: 1px solid #1f1f2d;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  
+  align-items: flex-start;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
 .main-footer {
   bottom: 0;
   background-color: #1f1f2d;
