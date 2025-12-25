@@ -1,36 +1,38 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.6">
     <title>Archaeopteriks</title>
     <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <div>
-      <header class="header">
+</head>
+<body>
+    <header class="header">
         <div class="header-content">
-          <a href="index.html" class="header-link">
-            <img class="img_set" src="images/main.png" alt="home" width="400" height="64">
-          </a>
-          <p></p>
-          <img src="images/menu.png" alt="menu" width="32" height="32">
-          <a href="projects.html" class="header-link">
-            <img src="images/projects.png" alt="projects" width="132" height="42">
-          </a>
-          <img src="images/border.png" alt="about" width="32" height="32">
-          <a href="about.html" class="header-link">
-            <img src="images/about.png" alt="about" width="132" height="42">
-          </a>
-          <img src="images/border.png" alt="about" width="32" height="32">
-          <a href="game.html" class="header-link">
-            <img src="images/game.png" alt="game" width="80" height="32">
-          </a>
-          <img src="images/border.png" alt="about" width="32" height="32">
-          <a href="guestbook.html" class="header-link">
-            <img src="images/guest.png" alt="guest" width="132" height="35">
-            <img src="images/smile.png" alt="smile" width="32" height="32">
-          </a>
+            <a href="index.html" class="header-link">
+                <img class="img_set" src="images/main.png" alt="home" width="400" height="64">
+            </a>
+            <div class="nav-links">
+                <img src="images/menu.png" alt="menu" width="32" height="32">
+                <a href="projects.html" class="header-link">
+                    <img src="images/projects.png" alt="projects" width="132" height="42">
+                </a>
+                <img src="images/border.png" alt="border" width="32" height="32">
+                <a href="about.html" class="header-link">
+                    <img src="images/about.png" alt="about" width="132" height="42">
+                </a>
+                <img src="images/border.png" alt="border" width="32" height="32">
+                <a href="game.html" class="header-link">
+                    <img src="images/game.png" alt="game" width="80" height="32">
+                </a>
+                <img src="images/border.png" alt="border" width="32" height="32">
+                <a href="guestbook.html" class="header-link">
+                    <img src="images/guest.png" alt="guest" width="132" height="35">
+                    <img src="images/smile.png" alt="smile" width="32" height="32">
+                </a>
+            </div>
         </div>
-      </header>
+    </header>
       <main>
         <div class="header-container">
           <div class="content">
@@ -39,7 +41,7 @@
         </div>
         <div class="text-container">
             <div class="text-box">
-              <form id="guestbook" method="POST">
+              <form class="text-container" id="guestbook" method="POST">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required maxlength="50">
                 <label for="message">Message:</label>
